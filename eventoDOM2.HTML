@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicativo de Anotações</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        #nota-input {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        #adicionar-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #lista-notas {
+            width: 100%;
+            max-width: 600px;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nota-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .nota-item button {
+            background: #e74c3c;
+            border: none;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .nota-item button:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Aplicativo de Anotações</h1>
+    <input type="text" id="nota-input" placeholder="Digite sua nota aqui">
+    <button id="adicionar-btn">Adicionar Nota</button>
+    <ul id="lista-notas"></ul>
+
+    <script>
+        document.getElementById('adicionar-btn').addEventListener('click', function() {
+           
+            const notaInput = document.getElementById('nota-input');
+            const notaTexto = notaInput.value.trim();
+
+           
+            if (notaTexto === '') {
+                alert('Por favor, digite uma nota.');
+                return;
+            }
+
+            // Cria um novo item de lista para a nota
+            const notaItem = document.createElement('li');
+            notaItem.className = 'nota-item';
+            notaItem.innerHTML = `
+                ${notaTexto}
+                <button onclick="removerNota(this)">Excluir</button>
+            `;
+
+            
+            document.getElementById('lista-notas').appendChild(notaItem);
+
+            
+            notaInput.value = '';
+        });
+
+        function removerNota(button) {
+            
+            const notaItem = button.parentElement;
+            notaItem.remove();
+        }
+    </script>
+</body>
+</html>
